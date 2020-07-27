@@ -77,20 +77,74 @@ void BubbleSort(int R[],int n) {
 }
 
 //快速排序
+void QuickSort(int R[], int low,int high) {
+	int i = low, j = high;
+	int temp;
+	if (low < high) {
+		temp = R[low];
+		while (i < j) {
+			while (i < j && R[j] >= temp) {
+				--j;
+			}
+			if (i < j) {
+				R[i] = R[j];
+				++i;
+			}
+			while (i < j && R[i] < temp) {
+				++i;
+			}
+			if (i < j) {
+				R[j] = R[i];
+				--j;
+			}
+		}
+		R[i] = temp;
+		QuickSort(R, low, i - 1);
+		QuickSort(R,i + 1, high);
+	 }
+}
 
 //简单选择排序
+void SelectSort(int R[], int n) {
+	int i, j, s;
+	int min, tag = 0;
+	for (i = 0; i < n; i++) {
+		min = R[i + 1];
+		//找出i之后的最小值
+		for (j = i + 1; j < n; j++) { 
+			if (min > R[j]) {
+				min = R[j];
+				tag = j;
+			}
+		}
+		//判断如果i之后的最小值小于R[i]，则交换
+		if (R[i] > min) {
+			s = R[i];
+			R[i] = R[tag];
+			R[tag] = s;
+			tag = 0;
+		}
+	}
+}
 
 //堆排序
 
+
 //二路归并排序
 
+
 //基数排序
+
 
 
 int main() {
 	int a[5] = { 10,56,78,5,6};
 	//int length = sizeof(a) / sizeof(a[0]);
 	//printf("length = %d \n "+ length);
-	BubbleSort(a, 5);
+	SelectSort(a, 5);
+	int k;
+	for (k = 0; k < 5; k++) {
+		printf("%d ", a[k]);
+	}
 	return 0;
 }
