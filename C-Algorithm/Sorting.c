@@ -165,7 +165,6 @@ int get_Max(int a[],int n) {
 		max = a[i] > max ? a[i] : max;
 	return max;
 }
-
 /*
  * 对数组按照"某个位数"进行排序(桶排序)
  *
@@ -182,7 +181,7 @@ int get_Max(int a[],int n) {
  */
 void count_sort(int a[], int n, int exp) {
 	//存储"被排序数据"的临时数组
-	int output[n];
+	int output[10];
 	int i, buckets[10] = { 0 };
 	//将数据出现的次数存储在buckets[]中
 	for (i = 0; i < n; i++) {
@@ -210,15 +209,37 @@ void RadixSort(int a[], int n) {
 	}
 }
 
+//课后题1-3  设计一个双向冒泡排序算法，即在排序过程中交替改变扫描方向
+void BubbleSort_TwoWay(int a[], int n) {
+	int i, j, k;
+	int trem;
+	for (i = 0; i < n / 2; i++) {
+		//从前往后冒泡
+		for (j = 0; j < n - i; j++) {
+			if (a[j] > a[j + 1]) {
+				trem = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = trem;
+			}
+		}
+		//从后往前冒泡
+		for (k = n - i - 2; k > i; k--) {
+			if (a[k] < a[k - 1]) {
+				trem = a[k];
+				a[k] = a[k - 1];
+				a[k - 1] = trem;
+			}
+		}
+	}
+	for (i = 0; i < n; i++) {
+		printf("%d ", a[i]);
+	}
+}
 
 int main() {
 	int a[5] = { 10,56,78,5,6};
 	//int length = sizeof(a) / sizeof(a[0]);
 	//printf("length = %d \n "+ length);
-	SelectSort(a, 5);
-	int k;
-	for (k = 0; k < 5; k++) {
-		printf("%d ", a[k]);
-	}
-	return 0;
+	BubbleSort_TwoWay(a, 5);
+	//return 0;
 }
