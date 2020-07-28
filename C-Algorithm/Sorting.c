@@ -131,10 +131,84 @@ void SelectSort(int R[], int n) {
 
 
 //二路归并排序
+/*
+ * 将一个数组中的两个相邻有序区间合并成一个
+ *
+ * 参数说明：
+ * a -- 包含两个有序区间的数组
+ * start -- 第1个有序区间的起始地址。
+ * mid   -- 第1个有序区间的结束地址。也是第2个有序区间的起始地址。
+ * end   -- 第2个有序区间的结束地址。
+ */
+void MergeSort(int a[], int start,int mid,int end) {
+	// tmp是汇总2个有序区的临时区域
+	int* tmp = (int*)malloc((end - start + 1) * sizeof(int));
+	int i = start;
+	int j = mid + 1;
+	int k = 0;
+	while (i <= mid && j <= end) {
+		if (a[i] <= a[j]) {
+			tmp[k++] = a[i++];
+		}
+		else {
+			tmp[k++] = a[j++];
+		}
+	}
+}
 
 
 //基数排序
+//获取数组内的最大值
+int get_Max(int a[],int n) {
+	int i, max = a[0];
+	for (i = 1; i < n; i++)
+		max = a[i] > max ? a[i] : max;
+	return max;
+}
 
+/*
+ * 对数组按照"某个位数"进行排序(桶排序)
+ *
+ * 参数说明：
+ *     a -- 数组
+ *     n -- 数组长度
+ *     exp -- 指数。对数组a按照该指数进行排序。
+ *
+ * 例如，对于数组a={50, 3, 542, 745, 2014, 154, 63, 616}；
+ *    (01) 当exp=1表示按照"个位"对数组a进行排序
+ *    (02) 当exp=10表示按照"十位"对数组a进行排序
+ *    (03) 当exp=100表示按照"百位"对数组a进行排序
+ *    ...
+ */
+void count_sort(int a[], int n, int exp) {
+	//存储"被排序数据"的临时数组
+	int output[n];
+	int i, buckets[10] = { 0 };
+	//将数据出现的次数存储在buckets[]中
+	for (i = 0; i < n; i++) {
+		buckets[(a[i] / exp) % 10]++;
+	}
+	//更改buckets[i],目的是让更改后的buckets[i]的值，是该数据在output[]中的位置
+	for (i = 1; i < 10; i++) {
+		buckets[i] += buckets[i - 1];
+	}
+	//将数据存储到临时数组output[]中
+	for (i = n - 1; i >= 0; i--) {
+		output[buckets[(a[i] / exp) % 10] - 1] = a[i];
+		buckets[(a[i] / exp) % 10]--;
+	}
+	//将排序号的数据赋值给a[]
+	for (i = 0; i < n; i++) {
+		a[i] = output[i];
+	}
+}
+void RadixSort(int a[], int n) {
+	int exp;
+	int max = get_Max(a, n);
+	for (exp = 1; max / exp > 0; exp *= 10) {
+		count_sort(a, n, exp);
+	}
+}
 
 
 int main() {
