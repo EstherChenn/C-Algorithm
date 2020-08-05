@@ -27,6 +27,9 @@
     <ClCompile Include="Matrix.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="List.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="redme.txt">
