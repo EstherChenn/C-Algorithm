@@ -32,8 +32,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="redme.txt">
+    <None Include="README.md">
       <Filter>源文件</Filter>
-    </Text>
+    </None>
   </ItemGroup>
 </Project>

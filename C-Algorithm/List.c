@@ -2,7 +2,7 @@
 
 #define maxsize 4
 //顺序表的结构体定义
-typedef struct {
+typedef struct Sqlist {
 	int data[maxsize];
 	int length;
 }Sqlist;
@@ -20,18 +20,18 @@ typedef struct DLNode {
 	struct DLNode* next;
 }DLNode;
 
-//初始化顺序表 
-void Sqlist_create(Sqlist* sq,int len) {
+//初始化顺序表
+void Sqlist_create(Sqlist* sq, int len) {
 	int i;
 	sq->length = len;
-	for (i = 0; i < len; i++) { 
+	for (i = 0; i < len; i++) {
 		scanf_s("%d", &(sq->data[i]));
-	//	printf("%d = %d \n", i,sq->data[i]);
+		//	printf("%d = %d \n", i,sq->data[i]);
 	}
 }
 
 //顺序表的查找
-int Sqlist_find(Sqlist *sq,int x) {
+int Sqlist_find(Sqlist* sq, int x) {
 	int i;
 	for (i = 0; i < sq->length; i++) {
 		if (sq->data[i] == x) {
@@ -42,7 +42,7 @@ int Sqlist_find(Sqlist *sq,int x) {
 }
 
 //顺序表的插入(x是插入值,k是插入位置)
-void Sqlist_insert(Sqlist* sq, int x,int k) {
+void Sqlist_insert(Sqlist* sq, int x, int k) {
 	int i, j;
 	for (i = 0; i < sq->length; i++) {
 		if (i == k) {
@@ -55,7 +55,7 @@ void Sqlist_insert(Sqlist* sq, int x,int k) {
 			}*/
 			sq->data[i] = x;
 		}
-	} 
+	}
 	/*for (i = 0; i < sq->length; i++) {
 		printf("%d ", sq->data[i]);
 	}
@@ -87,8 +87,8 @@ void LNode_initList(LNode* C) {
 
 //头插法建立链表(将n个元素已经存储在数组a中，用头插法建立单链表C)
 void LNode_createlistF(LNode* C, int a[], int n) {
-	LNode *s; 
-	int i; 
+	LNode* s;
+	int i;
 	//头结点后的第一个结点
 	C = (LNode*)malloc(sizeof(LNode));
 	C->data = NULL;
@@ -111,10 +111,10 @@ void LNode_createlistR(LNode** C, int a[], int n) {
 	int i;
 	//C的头结点申请空间
 	*C = (LNode*)malloc(sizeof(LNode));
-//	C->data = NULL;
+	//	C->data = NULL;
 	(*C)->next = NULL;
-	//r指向头结点 
-	r =*C;
+	//r指向头结点
+	r = *C;
 	for (i = 0; i < n; i++) {
 		s = (LNode*)malloc(sizeof(LNode));
 		s->data = a[i];
@@ -166,8 +166,8 @@ void LNode_merge(LNode* A, LNode* B, LNode** C) {
 int LNode_FindAndDelete(LNode* C, int x) {
 	LNode* p, * q;
 	p = C;
-	while (p -> next != NULL) {
-		if ( p->next->data == x)
+	while (p->next != NULL) {
+		if (p->next->data == x)
 			break;
 		p = p->next;
 	}
@@ -178,7 +178,7 @@ int LNode_FindAndDelete(LNode* C, int x) {
 	else {
 		q = p->next;
 		p->next = p->next->next;
-	//	free(q);
+		//	free(q);
 		return 1;
 	}
 }
@@ -214,7 +214,7 @@ DLNode* DLNode_find(DLNode* C, int x) {
 }
 
 //双链表插入结点
-void DLNode_insert(DLNode* C, DLNode *s) {
+void DLNode_insert(DLNode* C, DLNode* s) {
 	DLNode* p = C->next;
 	s->next = p->next;
 	s->prior = p;
@@ -227,7 +227,7 @@ void DLNode_delete(DLNode* C, DLNode* p) {
 	DLNode* q = p->next;
 	p->next = q->next;
 	q->next->prior = p;
-//	free(q);
+	//	free(q);
 }
 
 //1.3 设计一个算法，将顺序表中的所有元素逆置
@@ -249,8 +249,8 @@ void Sqlist_trans(Sqlist* s) {
 void Sqlist_delij(Sqlist* s, int i, int j) {
 	int n;
 	int k = i;
-	for (n = j + 1, k = i; n < s->length; n++, k++ ) {
-		if (s->data[n] != NULL && k<=j ) {
+	for (n = j + 1, k = i; n < s->length; n++, k++) {
+		if (s->data[n] != NULL && k <= j) {
 			s->data[k] = s->data[n];
 			(s->length)--;
 		}
@@ -272,7 +272,7 @@ void Sqlist_biao(Sqlist* q) {
 	for (i = 1; i < q->length; i++) {
 		if (head > q->data[0]) {
 			//mi-(i-1)数都后移一位
-			for (j = i-1; j>=mi; j--) {
+			for (j = i - 1; j >= mi; j--) {
 				index = q->data[i];
 				q->data[j + 1] = q->data[j];
 			}
@@ -305,8 +305,7 @@ void LNode_delNode(LNode** L) {
 			s = s->next;
 			r = s->next;
 		}
-	} 
-
+	}
 }
 
 //1.7 设计一个算法删除单链表L（有头结点）中的一个最小值结点
@@ -333,7 +332,6 @@ void LNode_delmin(LNode* L) {
 	free(r);
 }
 
-
 //1.8 有一个线性表，采用头结点的单链表L来存储。设计一个算法将其逆置。要求不能建立新结点，只能通过表中已有结点的重新组合来完成
 void LNode_invert(LNode* L) {
 	//*s指向当前结点,*r指向当前结点的下一结点，*f指向当前结点的前一个结点
@@ -342,7 +340,6 @@ void LNode_invert(LNode* L) {
 	s = f->next;
 	r = s->next;
 	while (s->next != NULL) {
-
 	}
 }
 
@@ -353,25 +350,22 @@ void LNode_invert(LNode* L) {
 
 //2.3 试编写一个函数，以不多于3n/2的平均比较次数，在一个有n个整数的顺序表A中找出最大值和最小值
 
-
-
-
 int main() {
-	/*LNode* A; 
+	/*LNode* A;
 	LNode* A1;
 	LNode* B;
 	LNode* B1;
-	LNode* C; 
+	LNode* C;
 	int a[4] = { 4,5,7,8 };
 	int b[6] = { 1,2,3,4,5,6 };
 	printf("A：\n");
-	LNode_createlistR(&A,a,4); 
+	LNode_createlistR(&A,a,4);
 	A1 = A->next;
 	printf("B：\n");
 	LNode_createlistR(&B, b, 6);
 	B1 = B->next;
 	printf("C：\n");
-	LNode_merge(&A1, &B1, &C); 
+	LNode_merge(&A1, &B1, &C);
 	while (C != NULL) {
 		printf("%d ", C->data);
 		C = C->next;

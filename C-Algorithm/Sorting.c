@@ -1,19 +1,18 @@
 #include <stdio.h>
 
-
 /**
 	第8章 排序
 */
 
 //直接插入排序
-void DirectInsertionSorting(int R[],int length, int trem) {
+void DirectInsertionSorting(int R[], int length, int trem) {
 	;
-	int i,j,tag=0;
+	int i, j, tag = 0;
 	printf("请输入插入的数值：");
 	//scanf( "%d", &trem);
 	for (i = 0; i < length; i++) {
 		if (trem < R[i]) {
-			for (j = length; j >i; j--) {
+			for (j = length; j > i; j--) {
 				R[j] = R[j - 1];
 			}
 			R[i] = trem;
@@ -30,9 +29,9 @@ void DirectInsertionSorting(int R[],int length, int trem) {
 }
 
 //折半插入排序
-void BinaryInsertionSort(int R[], int n,int trem) {
-	int low,high,mid,m;
-	int i; 
+void BinaryInsertionSort(int R[], int n, int trem) {
+	int low, high, mid, m;
+	int i;
 	low = 0;
 	high = n - 1;
 	mid = n / 2;
@@ -47,7 +46,7 @@ void BinaryInsertionSort(int R[], int n,int trem) {
 		}
 		mid = (low + high) / 2;
 	}
-	m = mid ;
+	m = mid;
 	//将数值插入
 	for (i = n; i > m; i--) {
 		R[i] = R[i - 1];
@@ -60,11 +59,11 @@ void BinaryInsertionSort(int R[], int n,int trem) {
 }
 
 //冒泡排序
-void BubbleSort(int R[],int n) {
-	int i,j, s;
+void BubbleSort(int R[], int n) {
+	int i, j, s;
 	for (i = 1; i < n; i++) {
-		for (j = 0; j < n-i; j++) {
-			if (R[j] > R[j+1]) {
+		for (j = 0; j < n - i; j++) {
+			if (R[j] > R[j + 1]) {
 				s = R[j];
 				R[j] = R[j + 1];
 				R[j + 1] = s;
@@ -77,7 +76,7 @@ void BubbleSort(int R[],int n) {
 }
 
 //快速排序
-void QuickSort(int R[], int low,int high) {
+void QuickSort(int R[], int low, int high) {
 	int i = low, j = high;
 	int temp;
 	if (low < high) {
@@ -100,35 +99,34 @@ void QuickSort(int R[], int low,int high) {
 		}
 		R[i] = temp;
 		QuickSort(R, low, i - 1);
-		QuickSort(R,i + 1, high);
-	 }
+		QuickSort(R, i + 1, high);
+	}
 }
 
 //简单选择排序
 void SelectSort(int R[], int n) {
-	int i, j, s,k;
+	int i, j, s, k;
 	int min, tag;
-	for (i = 0; i < n-1; i++) {
+	for (i = 0; i < n - 1; i++) {
 		tag = i + 1;
 		min = R[i + 1];
 		//找出i之后的最小值
-		for (j = i + 1; j < n; j++) { 
-			if (R[j] < min) { 
+		for (j = i + 1; j < n; j++) {
+			if (R[j] < min) {
 				min = R[j];
 				tag = j;
 			}
-		} 
+		}
 		//判断如果i之后的最小值小于R[i]，则交换
 		if (min < R[i]) {
 			s = R[i];
 			R[i] = R[tag];
-			R[tag] = s; 
-		} 
+			R[tag] = s;
+		}
 	}
 }
 
 //堆排序
-
 
 //二路归并排序(未完成)
 /*
@@ -140,9 +138,8 @@ void SelectSort(int R[], int n) {
  * mid   -- 第1个有序区间的结束地址。也是第2个有序区间的起始地址。
  * end   -- 第2个有序区间的结束地址。
  */
-void MergeSort(int a[], int start, int mid, int end) { 
+void MergeSort(int a[], int start, int mid, int end) {
 }
-
 
 //基数排序
 //获取数组内的最大值
@@ -200,9 +197,9 @@ void RadixSort(int a[], int n) {
 void BubbleSort_TwoWay(int a[], int n) {
 	int i, j, k;
 	int trem;
-	for (i = 0; i <= n/2; i++) {
+	for (i = 0; i <= n / 2; i++) {
 		//从前往后冒泡
-		for (j = 0; j < n - i-1; j++) {
+		for (j = 0; j < n - i - 1; j++) {
 			if (a[j] > a[j + 1]) {
 				trem = a[j];
 				a[j] = a[j + 1];
@@ -227,21 +224,19 @@ void BubbleSort_TwoWay(int a[], int n) {
 //归并排序，每归并依次书写一个次序
 
 //快速排序，每划分一次书写一个次序
-void
-//堆排序，先建成一个堆（写出一个序列），然后每从堆顶取下一个关键字后，将堆调整一次（每次都写出一个序列），直到排序完成
 
+//堆排序，先建成一个堆（写出一个序列），然后每从堆顶取下一个关键字后，将堆调整一次（每次都写出一个序列），直到排序完成
 
 //课后题1-6 给出关键字序列｛ 321, 156, 57, 46, 28, 7, 331, 33, 34, 63 ｝,
 //采用最低位优先算法对其进行基数排序,列出每趟分配和收集的结果
 
-
 int main() {
 	int k;
-	int a[11] = { 10,56,78,5,5,3,2,1,0,3,6};
+	int a[11] = { 10,56,78,5,5,3,2,1,0,3,6 };
 	//int length = sizeof(a) / sizeof(a[0]);
 	//printf("length = %d \n "+ length);
-	
+
 	BubbleSort_TwoWay(a, 11);
-	
+
 	return 0;
 }

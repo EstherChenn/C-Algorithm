@@ -20,7 +20,7 @@ void trans(int a[][maxsize], int i) {
 }
 
 //矩阵相加
-void add(int a[][maxsize], int b[][maxsize], int c[][maxsize],int m, int n) {
+void add(int a[][maxsize], int b[][maxsize], int c[][maxsize], int m, int n) {
 	int i, j;
 	for (i = 0; i < m; i++) {
 		for (j = 0; j < n; j++) {
@@ -32,7 +32,7 @@ void add(int a[][maxsize], int b[][maxsize], int c[][maxsize],int m, int n) {
 }
 
 //矩阵相乘
-void mul(int a[][maxsize], int b[][maxsize], int c[][maxsize], int m, int n,int k) {
+void mul(int a[][maxsize], int b[][maxsize], int c[][maxsize], int m, int n, int k) {
 	int i, j, h;
 	for (i = 0; i < m; i++) {
 		for (j = 0; j < k; j++) {
@@ -72,7 +72,7 @@ int move1(int A[], int n) {
 }
 
 //2.1 关于浮点型数组A[0，...，n-1]，用递归算法求最大值
-float floatmax(float A[],int i, int j) { 
+float floatmax(float A[], int i, int j) {
 	float max;
 	if (i == j) {
 		return A[i];
@@ -89,8 +89,8 @@ float floatmax(float A[],int i, int j) {
 }
 
 //2.2 关于浮点型数组A[0，...，n-1]，用递归算法求数组中n个数之和
-float floatsum(float A[],int i, int n) {
-	float sum; 
+float floatsum(float A[], int i, int n) {
+	float sum;
 	if (i == n) {
 		return A[i];
 	}
@@ -131,7 +131,7 @@ void moveto(int A[], int n) {
 			A[tag] = A[i];
 			A[i] = s;
 			tag++;
-		} 
+		}
 	}
 	for (i = 0; i < n; i++) {
 		printf("%d ", A[i]);
@@ -140,7 +140,6 @@ void moveto(int A[], int n) {
 
 //4. 设有一元素为整数的线性表L，存放在一维数组A[0，...，n-1]中，设计一个算法，以A[n-1]为参考量，将该数组分为左右两个部分，
 //其中左半部分的元素值均小于等于A[n-1]，右半部分的元素值均大于A[n-1]，A[n-1]则位于这两部分之间。要求结果仍存放在数组A中。
-
 
 //5. 设计一个算法，对给定的一个整型m*n矩阵A，统计这个矩阵中具有下列特征的元素个数并输出它们的坐标及数值：它们既是所在行中
 //的最小值，又是所在列中的最小值；或者它们既是所在行中的最大值，又是所在列中的最大值。假设矩阵中元素各不相同，要求结果在
@@ -155,7 +154,7 @@ void pick(int A[][maxsize], int m, int n) {
 			min = A[i][j];
 			max = A[i][j];
 			//先找最小值
-			while (k < (m >  n ? m:n )) {
+			while (k < (m > n ? m : n)) {
 				if (k < m) {
 					min = min < A[i][k] ? min : A[i][k];
 				}
@@ -179,13 +178,12 @@ void pick(int A[][maxsize], int m, int n) {
 	}
 }
 
-
 int main() {
 	int A[3][5] = { 0,1,2,3,4, 5,6,7,8,9, 10,11,12,13,14 };
 	int B[5][3] = { 0,1,2,3,4, 5,6,7,8,9, 10,11,12,13,14 };
 	int C[3][3];
 	int D[9] = { 8,1,3,7,6,8,11,9,17 };
-	float sum = floatsum(D,0, 9);
+	float sum = floatsum(D, 0, 9);
 	pick(A, 3, 5);
 	//printf("sum = %f", sum);
 }
