@@ -336,9 +336,9 @@ void LNode_delmin(LNode* L) {
 void LNode_invert(LNode* L) {
 	//*s指向当前结点,*r指向当前结点的下一结点，*f指向当前结点的前一个结点
 	LNode* s, * r, * f;
-	f = s;
+	/*f = s;
 	s = f->next;
-	r = s->next;
+	r = s->next;*/
 	while (s->next != NULL) {
 	}
 }
