@@ -156,8 +156,23 @@ int op(int a, char Op, int b) {
 	}
 }
 int com(char exp[]) {
+	//定义和初始化栈
 	char data[maxsize];
 	int top = -1;
+	int i=0;
+	int a, b;
+	while (exp[i] != '\0') {
+		//判断值为数字还是运算符
+		if (exp[i] >= '0' && exp[i] <= '9') {
+			data[++top] = exp[i];
+		}
+		else {
+			//判断是否栈空
+			if (top != -1) {
+				//将字符型数字转换为整型
+			}
+		}
+	}
 }
 
 //3-3 用不带头结点的单链表存储链栈，设计初始化栈,判断栈是否为空，进栈和出栈等相应的算法
