@@ -186,11 +186,11 @@ int com(char exp[]) {
 }
 
 //3-3 用不带头结点的单链表存储链栈，设计初始化栈,判断栈是否为空，进栈和出栈等相应的算法
-void LNode_ALL(LNode** lst, int x) {
+void LNode_ALL(LNode* lst, int x) {
 	//初始化不带头结点的链栈
-
+	lst = NULL;
 	//判断栈是否为空
-	if ((*lst)->data == NULL) {
+	if (lst== NULL) {
 		printf("栈为空");
 	}
 	else {
@@ -200,9 +200,19 @@ void LNode_ALL(LNode** lst, int x) {
 	LNode* p = (LNode*)malloc(sizeof(LNode));
 	p->data = x;
 	p->next = NULL;
-	(*lst)->next = p;
+	p->next = lst;
+	lst = p;
 	//出栈
-
+	LNode* q = (LNode*)malloc(sizeof(LNode));
+	if (lst == NULL) {
+		printf("栈为空，不可出栈");
+	}
+	else {
+		p = lst;
+		x = p->data;
+		lst = p->next;
+		free(p);
+	}
 }
 
 //2.6 假设以带头结点的循环链表表示队列，并且只设一个指针指向队尾结点，但不设头指针，请写出相应的入队列和出队列算法
