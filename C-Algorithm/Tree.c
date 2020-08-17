@@ -286,9 +286,26 @@ int nodeNum(TBTNode* p) {
 }
 
 //1.3 假设二叉树采用二叉链存储结构，设计一个算法，计算一棵给定二叉树的所有叶子结点数
- 
-//1.4 假设二叉树采用二叉链存储结构，设计一个算法，利用结点的右孩子指针rchild将一棵二叉树的叶子结点按照从左往右的顺序串成一个单链表（在题目中定义两个
-//指针，head和tail，其中head指向第一个叶子结点，head初值为NULL，tail指向最后一个叶子结点
+int n = 0;
+int count(TBTNode* p) {
+	int n1, n2;
+	if (p == NULL) {
+		return 0;
+	}
+	else if ((p->lchild == NULL) && (p->rchild == NULL)) {
+		return 1;
+	}
+	else {
+		n1 = count(p->lchild);
+		n2 = count(p->rchild);
+		return n1 + n2 + 1;
+	}
+}
+
+//1.4 假设二叉树采用二叉链存储结构，设计一个算法，利用结点的右孩子指针rchild将一棵二叉树的叶子结点按照从左往右的顺序串成一个单链表
+//（在题目中定义两个指针，head和tail，其中head指向第一个叶子结点，head初值为NULL，tail指向最后一个叶子结点)
+
+
 
 //1.5 在二叉树的二叉链存储结构中，增加一个指向双亲结点的parent指针，设计一个算法，给这个指针赋值，并输出所有结点到根结点的路径
 
