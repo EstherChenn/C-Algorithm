@@ -161,19 +161,106 @@ void c12() {
 }
 
 //13. 请编程序将“China”译成密码
-
+void c13() {
+	char c[] = { 'C','h','i','n','a' }; 
+	int i;
+	printf("putchar:\n");
+	for (i = 0; i < 5; i++) {
+		c[i] = c[i] + 4;
+		putchar(c[i]);
+	}
+	printf("printf:\n");
+	for (i = 0; i < 5; i++) {
+		c[i] = c[i] + 4; 
+	}
+	printf("%s", c);
+}
 
 //14. 给出一个百分制成绩，要求输出成绩等级A,B,C,D,E。90分以上为A，80-90分为B，70-79分为C，60-69分为D，60分以下为E
+void c14(int grade) {
+	int i;
+	if (grade > 100 || grade < 0)
+		printf("输入成绩格式错误\n");
+	switch (grade / 10) {
+	case(9):
+		printf("成绩为A\n");
+		break;
+	case(8):
+		printf("成绩为B\n");
+		break;
+	case(7):
+		printf("成绩为C\n");
+		break;
+	case(6):
+		printf("成绩为D\n");
+		break;
+	default:
+		printf("成绩为E\n");
+		break;
+	}
+}
 
 //15. 输出2的N次幂：1，2，4，8，..一直到2^N
+void c15() {
+	int N, sum, i, j;
+	printf("请输入N：\n");
+	scanf_s("%d", &N);
+	sum = 0;
+	j = 1;
+	for (i = 0; i <= N; i++) {
+		printf("2的%d次幂 = %d\n",i,j);
+		j *= 2;
+	}
+}
 
 //16. 编写程序判断一个数是否为素数
+int c16(int a) {
+	int i; 
+	for (i = 2; i < a; i++) {
+		if (a % i == 0) { 
+			printf("%d不是素数\n",a);
+			return 0;
+		}			
+	}
+	printf("%d是素数\n", a);
+	return 1;
+}
 
 //17. 输出2-300间的素数
+void c17() {
+	int i;
+	for (i = 2; i <= 300; i++) {
+		if (c16(i) == 1) {
+			printf("%d ", i);
+		}
+	}
+	printf("\n");
+}
 
 //18. 求2+22+222+2222+...，共5项
+void c18() {
+	int i, sum = 0, s;
+	s = 2;
+	for (i = 1; i <= 5; i++) {
+		sum += s;
+		s = s * 10 + 2;
+	}
+	printf("2+22+222+2222+... = %d\n", sum);
+}
 
 //19. 编程1！+2！+3！+4！+...的值
+void c19() {
+	int n, sum = 0, i, j, m;
+	printf("请输入n：\n");
+	scanf("%d", &n);
+	m = 1;
+	for (i = 1; i <= n; i++) {
+		sum += m;
+		m *= (i+1);
+	}
+	printf("1！+2！+3！+4！+...+%d！ = %d\n", n, sum);
+}
+
 
 //20. 自然底数e=2.718281828...，现编程求e，e的计算公式为e=1+1/1！+1/2！+1/3！+...，要求当最后一项的值小于10^(-10)时结束
 
