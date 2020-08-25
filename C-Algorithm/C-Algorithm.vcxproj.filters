@@ -39,7 +39,13 @@
     <ClCompile Include="Tree.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="c60-1.c">
+    <ClCompile Include="test.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="c1-c60-A.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="c60-c120-B.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
