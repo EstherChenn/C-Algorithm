@@ -387,7 +387,46 @@ void c84() {
 	}
 }
 
+//85. 牛顿迭代法求方程根
+void c85() {
+	float a, b, c, d;
+	float x0, x = 1.5, f, fd, h;
+	printf("请输入a b c d：\n");
+	scanf_s("%f %f %f %f", &a, &b, &c, &d);
+	do {
+		x0 = x;
+		f = a * x0 * x0 * x0 + b * x0 * x0 + c * x0 + d;
+		fd = 3 * a * x0 * x0 + 2 * b * x0 + c;
+		h = f / fd;
+		x = x0 - h;
+	} while (fabs(x - x0) >= 1e-5);
+	printf("x = %f", x);
+}
+
+//86. 枚举排列组合
+void c86() {
+	char str[] = { 'a','b','c' ,'d' ,'e' ,'f','g' };
+	int n, i, j, k;
+	for (i = 0; i < 7; i++) {
+		for (j = 0; j < 7; j++) {
+			for (k = 0; k < 7; k++) {
+				if ((i != j) && (i != k) && (j != k)) {
+					printf("%c %c %c\n", str[i], str[k], str[k]);
+				}
+			}
+		}
+	}
+}
+
+//87.乒乓球问题
+
+//88. 换分币问题（将5元的人民币换成1元，5角和1角的硬币，共有多少种不同的兑换方法
+
+//89. 百钱买百鸡问题（鸡翁一，值钱五，鸡母一，值钱三，鸡雏三，值钱一，百钱买百鸡，问翁，母，雏各几何？）
+
+
+
 int main() {
-	c84();
+	c86();
 	return 0;
 }
