@@ -1,41 +1,55 @@
 #include <stdio.h>
-#include<math.h> 
-#define maxsize 1000
+//#include <stdlib.h>
+#include <math.h>
+#include <ctype.h>
+#include <string.h>
+#define maxSize 100
 
-//66. 求3000以内的亲密数（A的全部因子之和等于B，B同理）
-int yzsum(int n) { 
-	int sum = 1;
-	int  j;  
-	while (n != 0) {
-		for (j = 2; j < n; j++) {
-			if (n % j == 0) {
-				n = n / j;
-				printf("%d * ", j);
-				break;
+void Swap(char s[], int i, int j)
+{
+	char tmp;
+
+	tmp = s[i];
+	s[i] = s[j];
+	s[j] = tmp;
+}
+
+void FlagSort(char f[])
+{
+	int b, w, r;//分别代表蓝旗、白旗、红旗指针
+	char* tmp = f;
+	b = -1;
+	w = 0;
+	r = strlen(f) - 1;
+
+	while (w <= r)
+	{
+		if (f[w] == 'W')
+			++w;
+		else if (f[w] == 'B')
+		{
+			++b;
+			Swap(f, w, b);//曾经做错过的点:因为b当时设置的初值为0，++b不能放在交换操作的前面，若改为-1则可以
+		}
+		else
+		{
+			//从后往前找到第一个不是红旗的位置
+			while (r >= w && f[r] == 'R')
+				--r;
+
+			if (r >= w)
+			{
+				Swap(f, w, r);
 			}
 		}
 	}
-	printf("\n");
-	return sum;
-}
-void c66() {
-	int a, b, c;
-	int i, j;
-	b = yzsum(90);
-	b = yzsum(2);
-	for (a = 2; a <= 5; a++) {
-		//求a的全部因子之和b
-		b = yzsum(a);
-		c = yzsum(b);
-	//	printf("b = %d ,c =  %d\n", b, c);
-		if (b == c) {
-			printf("%d 和 %d 是亲密数\n", a, b);
-		}
-	}
 }
 
 
-int main() {
-	c66();
+int main()
+{
+	char f[maxSize] = "WRBWRBWWBBRRWRWBBWRRWRBBWB";
+	FlagSort(f);
+	puts(f);
 	return 0;
 }

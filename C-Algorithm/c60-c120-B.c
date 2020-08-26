@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 #define maxsize 100
 
 //61. 求两个数最大公约数和最小公倍数
@@ -419,14 +420,166 @@ void c86() {
 }
 
 //87.乒乓球问题
+void c87() {
+	char jia[3] = { 'a','b','c' };
+	char yi[3] = { 'x','y','z' };
+	int i, j;
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < 3; j++) {
+			if ((jia[i] == 'a' && yi[j] == 'x') || (jia[i] == 'c' && yi[j] == 'x') || (jia[i] == 'c' && yi[j] == 'z')) {
+				
+			}
+			else {
+				printf("%c VS %c\n", jia[i], yi[j]);
+			}
+		}
+	}
+}
 
 //88. 换分币问题（将5元的人民币换成1元，5角和1角的硬币，共有多少种不同的兑换方法
+void c88() {
+	int i, j, k;
+	for (i = 1; i < 5; i++) {
+		for (j = 1; j < 10; j++) {
+			for (k = 1; k < 50; k++) {
+				if (i + 0.5 * j + 0.1 * k == 5) {
+					printf("%d %d %d\n", i, j, k);
+				}
+			}
+		}
+	}
+}
 
 //89. 百钱买百鸡问题（鸡翁一，值钱五，鸡母一，值钱三，鸡雏三，值钱一，百钱买百鸡，问翁，母，雏各几何？）
+void c89() {
+	int x, y, z;
+	for (x = 1; x <= 100; x++) {
+		for (y = 1; y <= 100; y++) {
+			for (z = 1; z <= 100; z++) {
+				if ((5 * x + 3 * y + z / 3 == 100) && (z % 3 == 0) && (x + y + z == 100)) {
+					printf("%d %d %d\n", x, y, z);
+				}
+			}
+		}
+	}
+}
 
+//90. 编写程序，实现如下表所示的5-魔方阵 【未验证】
+void c90() {
+	int a[5][5];
+	int i = 0, j = 2, k, b;
+	a[0][2] = 1;
+	k = 2;
+	for (k = 2; k < 25; k++) {
+		if (i == 0) {
+			i = 4;
+			j = j + 1;
+			a[i][j] = k;
+			printf("a[%d][%d] = %d\n", i, j, k);
+		}
+		else if (j + 1 > 4) {
+			i = i - 1;
+			j = 0;
+			a[i][j] = k;
+			printf("a[%d][%d] = %d\n", i, j, k);
+		}
+		else if ((k-1) % 5 == 0) {
+			i = i + 1;
+			j = j;
+			a[i][j] = k;
+			printf("a[%d][%d] = %d\n", i, j, k);
+		}
+		else{
+			i = i - 1;
+			j = j + 1;
+			a[i][j] = k;
+			printf("a[%d][%d] = %d\n", i, j, k);
+		}
+	}
+	for (i = 0; i < 5; i++) {
+		for (j = 0; j < 5; j++) {
+			printf("%d ", a[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+//91. 求0-7中所能组成的奇数个数
+void c91() {
+	int sum = 4, s = 4;
+	int j;
+	for (j = 2; j <= 8; j++) {
+		printf("\n%d", sum);
+		if (j <= 2)
+			s *= 7;
+		else
+			s *= 8;
+		sum += s;
+	}
+	printf("\nsum=%d", sum);
+}
+
+//92. 三旗问题
+void c92() {
+	char color[] = { 'R','W', 'B', 'W', 'W', 'B', 'R', 'B', 'W', 'R', '\0' };
+	char temp;
+	int w = 0, b = 0;
+	int r = strlen(color) - 1;
+	printf("strlen(color) = %d\n\n", strlen(color));
+	int i;
+	for (i = 0; i < strlen(color); i++)
+		printf("%c ", color[i]);
+	printf("\n\n");
+	while (w <= r) {
+		if (color[w] == 'W')
+			w++;
+		else {
+			if (color[w] == 'B') {
+				temp = color[b];
+				color[b] = color[w];
+				color[w] = temp;
+				b++;
+				w++;
+			}
+			else {
+				//从后往前找到第一个不是红旗的位置
+				while (w < r && color[r] == 'R') {
+					r--;
+				}
+				temp = color[r];
+				color[r] = color[w];
+				color[w] = temp;
+				r--;
+			}
+		}
+		printf("b = %d | w = %d | r = %d\n", b, w, r);
+		for (i = 0; i < strlen(color); i++)
+			printf("%c ", color[i]);
+		printf("\n");
+	}
+	printf("\nResult:\n");
+	for (i = 0; i < strlen(color); i++)
+		printf("%c ", color[i]);
+	printf("\n");
+}
+
+//93. 猴子吃桃问题
+void c93() {
+	int x1,x2 = 1, i;
+	for (i = 0; i < 9; i++) {
+		x1 = (x2 + 1) * 2;
+		x2 = x1;
+	}
+	printf("sum = %d\n", x1);
+}
+
+//94. 求黑洞数
+void c94() {
+
+}
 
 
 int main() {
-	c86();
+	c93();
 	return 0;
 }
