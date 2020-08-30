@@ -574,12 +574,202 @@ void c93() {
 }
 
 //94. 求黑洞数
+int maxof3(int a) {
+	int i = 0 , j, max,min, s[maxsize];
+	int max_tag, min_tag, mid_tag;
+	while (a != 0) {
+		s[i] = a % 10;
+		a = a / 10;
+		i++;
+	}
+	max = s[0];
+	min = s[0];
+	max_tag = 0;
+	min_tag = 0;
+	for (j = 0; j < 3; j++) {
+		if (max < s[j]) {
+			max = s[j];
+			max_tag = j;
+		}
+		if (min > s[j]) {
+			min = s[j];
+			min_tag = j;
+		}
+	}
+	for (j = 0; j < 3; j++) {
+		if (j != max_tag && j != min_tag)
+			mid_tag = j;
+	}
+	max = s[max_tag] * 100 + s[mid_tag] * 10 + s[min_tag];
+	printf("max = %d\n", max);
+	return max;
+}
+int minof3(int a) {
+	int i = 0, j, max, min, s[maxsize];
+	int max_tag, min_tag, mid_tag;
+	while (a != 0) {
+		s[i] = a % 10;
+		a = a / 10;
+		i++;
+	}
+	max = s[0];
+	min = s[0];
+	max_tag = 0;
+	min_tag = 0;
+	for (j = 0; j < 3; j++) {
+		if (max < s[j]) {
+			max = s[j];
+			max_tag = j;
+		}
+		if (min > s[j]) {
+			min = s[j];
+			min_tag = j;
+		}
+	}
+	for (j = 0; j < 3; j++) {
+		if (j != max_tag && j != min_tag)
+			mid_tag = j;
+	}
+	min = s[min_tag] * 100 + s[mid_tag] * 10 + s[max_tag];
+	printf("min = %d\n\n", min);
+	return min;
+}
 void c94() {
+	int a, m,n,max,min;
+	printf("请输入一个三位数：\n");
+	scanf_s("%d", &a);
+	max = maxof3(a);
+	min = minof3(a);
+	m = max - min; 
+	max = maxof3(m);
+	min = minof3(m);
+	n = max - min; 
+	while (m != n) {
+		m = n;
+		max = maxof3(m);
+		min = minof3(m);
+		n = max - min;
+	}
+	if (m == n)
+		printf("黑洞数为：%d\n", m);
+}
 
+//95. 分鱼问题1
+int fish(int n, int x) {
+	if ((x - 1) % 5 == 0) {
+		if (n == 1)
+			return 1;
+		else
+			return fish(n - 1, (x - 1) / 5 * 4);
+	}
+	return 0;
+}
+void c95() {
+	int i = 0, flag = 0, x;
+	do {
+		i = i + 1;
+		x = i * 5 + 1;
+		if (fish(5, x)) {
+			flag = 1;
+			printf("五个人合伙捕到的鱼总数为%d\n", x);
+		}
+	} while (!flag);
+}
+
+//96. 分鱼问题2
+
+
+//97. 按递增顺序依次列出所有分母为40，分子小于40的最简分数
+void c97() {
+	int i, j, num;
+	int state;
+	for (i = 1; i < 40; i++) {
+		state = 1;
+		//分母与分子是否有公约数
+		for (j = 2; j <= i; j++) {
+			if (i % j == 0 && 40 % j == 0) {
+				//有公约数
+				state = 0;
+				break;
+			}
+		}
+		if (state == 1) {
+			printf("%d / 40\n", i);
+		}
+	}
+}
+
+//98. 数组旋转问题（编写一个4*4的数组进行逆时针旋转90度后输出
+void c98() {
+	int a[4][4] = { 1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4 };
+	int b[4][4];
+	int i, j, k;
+	for (i = 0; i < 4; i++) {
+		for (j = 0; j < 4; j++) {
+			b[3 - j][i] = a[i][j];
+		}
+	}
+	for (i = 0; i < 4; i++) {
+		for (j = 0; j < 4; j++) {
+			printf("%d ", b[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 
+//99. 三色球抓取问题
+void c99() {
+	int a, b, c;
+	int count = 0;
+	printf("红 白 黑\n");
+	for (a = 1; a <= 4; a++) {
+		for (b = 1; b <= 2; b++) {
+			for (c = 1; c <= 6; c++) {
+				if (a + b + c == 8) {
+					//输出球个数
+					printf("%d  %d  %d\n", a, b, c);
+					count++;
+				}
+			}
+		}
+	}
+	printf("共有%d种可能的颜色搭配\n",count);
+}
+
+//100. 真分数分解为埃及分数
+void c100() {
+	int a, b, i, j;
+	printf("请输入分数：\n");
+	scanf_s("%d/%d", &a, &b);
+	//求分母的
+
+}
+
+//101. 递归求斐波那契数第n项
+int c101(int n) {
+	if (n < 2)
+		return 1;
+	return (c101(n - 1) + c101(n - 2));
+}
+
+//102. 接受一个整型值（无字符），使用递归把它转换为字符并打印它
+char c102() {
+
+}
+
+//103. 计算厄密多项式
+int c103(int n,int x) {
+	if (n <= 0)
+		return 1;
+	else if (n == 1)
+		return 2 * x;
+	else
+		return (2 * x * c103(n - 1, x) - 2 * (n - 1) * c103(n - 2, x));
+}
+
 int main() {
-	c93();
+	//c99();
+	printf("%d\n", c103(3,2));
 	return 0;
 }

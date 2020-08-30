@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <malloc.h>
 
 #define maxsize 4
 //顺序表的结构体定义
