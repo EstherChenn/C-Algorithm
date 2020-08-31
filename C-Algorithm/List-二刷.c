@@ -116,21 +116,27 @@ void zt2(LNode* l1, LNode*l2) {
 //1-3 设计一个算法，将顺序表中的所有元素逆置
 void c3() {
 	struct Sqlist *sq;  
-	sq = NULL;
-	int i = 0;
+	/*sq = NULL;
+	sq->length = 0;*/
+	sq = (Sqlist*)malloc(sizeof(Sqlist));
+	sq->length = 0;
+	int j,i = 0;
 	char k;
 	printf("请输入顺序表的值：\n");
-	while ((sq->data[i] = getchar()) != "\n") {
-		i++;
-		(sq->length)++;
+	for(j=0;j<10;j++) {
+		scanf_s("%d", &(sq->data[j]));
+		sq->length++;
 	}
-	for (i = 0; i < sq->length / 2; i++) {
+	//printf("length = %d\n",sq->length);
+	for (i = 0,j=(sq->length)-1; i < sq->length / 2; i++,j--) {
 		k = sq->data[i];
-		sq->data[i] = sq->data[sq->length - i];
-		sq->data[sq->length - i] = k;
+		sq->data[i] = sq->data[j];
+		sq->data[j] = k;
+	//	printf("%d: sq->data[%d] : %d    sq->data[%d] : %d \n",i,i, sq->data[i], j,sq->data[j]);
 	}
+	printf("\n结果是：\n");
 	for (i = 0; i < sq->length; i++) {
-		printf("%c ", sq->data[i]);
+		printf("%d ", sq->data[i]);
 	}
 	printf("\n");
 }
@@ -139,81 +145,93 @@ void c3() {
 void c4() {
 	struct Sqlist* sq;
 	int i, j, k;
+	sq = (Sqlist*)malloc(sizeof(Sqlist));
+	sq->length = 0;
+	printf("请输入顺序表的值：\n");
+	for (j = 0; j < 10; j++) {
+		scanf_s("%d", &(sq->data[j]));
+		sq->length++;
+	}
 	printf("请输入i和j\n");
 	scanf_s("%d", &i);
 	scanf_s("%d", &j);
-	for (k = i, k <= j; k++) {
-		printf("%c\n", sq->data[i]);
+	for (k = i; k <= j; k++) {
+		printf("%d  ", sq->data[k]);
 	}
 	printf("\n");
 }
 
 //1-5 有一个顺序表L，其元素为整型数据，设计一个算法，将L中所有小于表头元素的整数放在前半部分，
 //大于表头元素的放于后半部分
-void c5() {
-	struct Sqlist* sq;
-	int i, j, t = 0;
-	char ch;
-	for (i = 1; i < sq->length; i++) {
-		if (sq->data[i] < sq->data[t]) {
-			ch = sq->data[i];
-			for (j = i; j >= t; j--) {
-				//将t~i之间的数组后移1位
-				sq->data[i] = sq->data[i - 1];
-			}
-			sq->data[t] = ch;
-			t++;
+void c5(Sqlist* sq) { 
+	int temp;
+	int i = 0, j = sq->length - 1;
+	temp = sq->data[i];
+	while (i < j) {
+		while (i<j && sq->data[j]>temp)
+			--j;
+		if (i < j) {
+			sq->data[i] = sq->data[j];
+			++i;
+		}
+		while (i < j && sq->data[i] < temp)
+			++i;
+		if (i < j) {
+			sq->data[j] = sq->data[i];
+			--j;
 		}
 	}
+	sq->data[i]=temp;
+	for (i = 0; i < sq->length; i++)
+		printf("%d ", sq->data[i]);
+	printf("\n");
 }
 
 //1-6 有一个递增非空单链表，设计一个算法删除值域重复的结点。例如，{ 1,1,2,3,3,3,4,4,7,7,7, 9,9,9}删除后变成{1,2,3,4,7,9}
-void c6() {
-	struct LNode* L, * r, * t, * s;
-	int i, j;
-	L = (LNode*)malloc(sizeof(LNode));
-	L->next = NULL;
-	r = L;
-	while ((r->data = getchar()) != "\n") {
-		r->next = NULL;
-		r = r->next;
-	}
-	t = L;
-	while (t != NULL) {
-		if (t->data == t->next->data) {
-			s = t->next;
-			r->next = s->next;
-			free(s);
+void c6(LNode* L) {
+	struct LNode* p = L->next, * q; 
+	while (p->next != NULL) {
+		if (p->data == p->next->data) {
+			q = p->next;
+			p->next = q->next;
+			free(q);
+		}
+		else {
+			p = p->next;
 		}
 	}
 }
 
 //1-7 设计一个算法删除单链表L（有头结点）中的一个最小值结点
 void c7(LNode* L) {
-	struct LNode* min, * s, * pre;
-	min = (LNode*)mallc(sizeof(LNode));
-	min->next = NULL; 
-	min = L->next;
-	s = min;
-	while (s->next != NULL) {
-		pre = s;
-		if (s->next->data < min->data) {
-			min = s->next;
+	struct LNode* min, * minpre, * s, * pre;
+	pre = L;
+	s = pre->next;
+	min = s;
+	minpre = pre;
+	while (s != NULL) { 
+		if (s->data < minpre->data) {
+			min = s;
+			minpre = pre;
 		}
+		pre = s;
 		s = s->next;
 	}
 	//删除结点
-	pre->next = min->next;
+	minpre->next = min->next;
 	free(min);
 }
 
 //1-8 有一个线性表，采用带头结点的单链表L来存储。设计一个算法将其逆置。
 //要求不能建立新结点，只能通过表中已有结点的重新组合来完成
 void c8(LNode *L) {
-	LNode* s;
-	s = L->next;
-	while (s != NULL) {
-
+	LNode* p=L->next,*q;
+	L->next = NULL;
+	while (p != NULL) {
+		q = p->next; 
+		p->next = L->next;
+		L->next = p;
+		p = q;
 	}
 }
 
@@ -246,24 +264,88 @@ void c21() {
 	for (i = 1; i < 9; i++) {
 		min = min < A[i] ? min : A[i];
 	}
-	print("最小值是：%d\n",min);
+	printf("最小值是：%d\n",min);
 }
 
 
 //2-2 写一个函数，逆序打印单链表L中的数据
-void c22() {
-
+char c22(LNode *s) {
+	if (s != NULL) {
+		c22(s->next);
+		printf("%d ", s->data);
+	}
+	printf("\n");
 }
 
 
 //2-3 试编写一个函数，以不多于3*n/2的平均比较次数，在一个有n个整数的顺序表A中找出最大值和最小值
 void c23() {
-
+	Sqlist* sq;
+	sq = NULL;
+	int i = 0, j, k;
+	//sq->data[10] = { 1,3,4,6,7,31,4,5,67,3 };
+	while ((sq->data[i] = getchar()) != "\n") {
+		i++;
+		(sq->length)++;
+	}
+	int max = sq->data[0];
+	int min = sq->data[0];
+	for (i = 0; i < sq->length; i++) {
+		if (sq->data[i] > max) {
+			max = sq->data[i];
+		}
+		else {
+			if (sq->data[i] < min) {
+				min = sq->data[i];
+			}
+		}
+	}
+	printf("max = %d\n min = %d\n", max, min);
 }
 
 //2-4 
-
+void c24(Sqlist* A, Sqlist* B) {
+	Sqlist* A1, * B1;
+	A1 = NULL;
+	A1->length = 0;
+	B1 = NULL;
+	B1->length = 0;
+	int i, j = 0 , k;
+	for (i = 0; i < A->length || i < B->length; i++) {
+		if (A->data[i] != B->data[i]) {
+			A1->data[j] = A->data[i];
+			A1->length++;
+			B1->data[j] = B->data[i];
+			B1->length++;
+			j++;
+		}
+	}
+	if (A1->length == 0 && B1->length == 0) {
+		printf("A = B\n");
+	}
+	else if ((A1->length == 0 && B1->length != 0) || (A1->data[0] < B1->data[0])) {
+		printf("A < B\n");
+	}
+	else {
+		printf("A > B\n");
+	}
+}
 
 int main() {
-	c3();
+	/*struct Sqlist* sq;
+	sq = (Sqlist*)malloc(sizeof(Sqlist));
+	sq->length = 0;
+	int j;
+	printf("请输入顺序表的值：\n");
+	for (j = 0; j < 10; j++) {
+		scanf_s("%d", &(sq->data[j]));
+		sq->length++;
+	}*/
+	struct LNode* L;
+	L = (LNode*)malloc(sizeof(LNode));
+	L ->next = NULL;
+	int a[10] = { 1,1,1,2,3,4,4,5,5,6 };
+	createlistF(L, a, 10);
+	c6(L);
+	return 0;
 }

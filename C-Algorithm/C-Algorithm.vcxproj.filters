@@ -51,6 +51,9 @@
     <ClCompile Include="List-二刷.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="StackAndQueue-二刷.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">
